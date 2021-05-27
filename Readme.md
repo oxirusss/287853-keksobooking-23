@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Ksenia Parakhina](https://up.htmlacademy.ru/javascript/23/user/287853).
-* Наставник: `Неизвестно`.
+* Наставник: [Алёна Сиприкова](https://up.htmlacademy.ru/htmlcss/30/user/549115).
 
 ---
 
