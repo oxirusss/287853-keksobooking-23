@@ -10,14 +10,27 @@ const getRandomElement = (list) => list[getRandomNumber(0, list.length - 1)];
 const getRandomElements = (list) => {
   const result = [];
   const amountOfRandomElements = getRandomNumber(1, list.length - 1);
-  for (let i = 0; i <= amountOfRandomElements; i++) {
-    let randomElement = getRandomElement(list);
+  for (let index = 0; index <= amountOfRandomElements; index++) {
+    const randomElement = getRandomElement(list);
     if (!result.includes(randomElement)) {
       result.push(randomElement);
     }
   }
   return result;
 };
+
+const avatarsListNumbers = [
+  '01',
+  '02',
+  '03',
+  '04',
+  '05',
+  '06',
+  '07',
+  '08',
+  '09',
+  '10',
+];
 
 // Берем рандомный аватар и удаляем из списка чтобы не повторялся
 const getRandomAvatar = () => {
@@ -27,59 +40,46 @@ const getRandomAvatar = () => {
   return randomAvatar;
 };
 
-const types = ["palace", "flat", "house", "bungalow", "hotel"];
-const checkTimes = ["12:00", "13:00", "14:00"];
+const types = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
+const checkTimes = ['12:00', '13:00', '14:00'];
 const featuresList = [
-  "wifi",
-  "dishwasher",
-  "parking",
-  "washer",
-  "elevator",
-  "conditioner",
+  'wifi',
+  'dishwasher',
+  'parking',
+  'washer',
+  'elevator',
+  'conditioner',
 ];
 const titles = [
-  "Отличная в старом городе",
-  "Молодежный прямо в центре",
-  "с видом на залив",
-  "Эксклюзивное",
-  "для вечеринок и съёмок",
-  "для романтических выходных",
-  "по цене однушки",
-  "со всеми удобствами",
-  "с персональным бассейном",
-  "со всеми удобствами",
+  'Отличная в старом городе',
+  'Молодежный прямо в центре',
+  'с видом на залив',
+  'Эксклюзивное',
+  'для вечеринок и съёмок',
+  'для романтических выходных',
+  'по цене однушки',
+  'со всеми удобствами',
+  'с персональным бассейном',
+  'со всеми удобствами',
 ];
 
 const descriptions = [
-  "Со всеми удобствами",
-  "В стиле арт-деко",
-  "Современная планировка",
-  "Панорамные окна",
-  "Хорошие соседи",
-  "Прекрасный вид",
-  "5 минут до центра",
-  "Идеально с детьми",
-  "Можно с животными",
-  "Свежий ремонт",
+  'Со всеми удобствами',
+  'В стиле арт-деко',
+  'Современная планировка',
+  'Панорамные окна',
+  'Хорошие соседи',
+  'Прекрасный вид',
+  '5 минут до центра',
+  'Идеально с детьми',
+  'Можно с животными',
+  'Свежий ремонт',
 ];
 
 const photosList = [
-  "https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg",
-  "https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg",
-  "https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg",
-];
-
-const avatarsListNumbers = [
-  "01",
-  "02",
-  "03",
-  "04",
-  "05",
-  "06",
-  "07",
-  "08",
-  "09",
-  "10",
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
 
 // Создаем объект
@@ -124,6 +124,6 @@ const createRentElement = () => {
 
 const rentList = [];
 
-for (let i = 0; i < 10; i++) {
+for (let index = 0; index < 10; index++) {
   rentList.push(createRentElement());
 }
