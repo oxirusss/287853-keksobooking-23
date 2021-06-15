@@ -1,48 +1,6 @@
-const getRandomNumber = (min = 0, max = 0) =>
-  Math.floor(min + Math.random() * (max - min));
-const getRandomCoordinates = (min = 0, max = 0, floats = 1) =>
-  (min + Math.random() * (max - min)).toFixed(floats);
-
-// Берем рандомный элемент из списка
-const getRandomElement = (list) => list[getRandomNumber(0, list.length - 1)];
-
-// Берем рандомный элемент из списка который не повторяется
-const getRandomElements = (list) => {
-  const result = [];
-  const amountOfRandomElements = getRandomNumber(1, list.length - 1);
-  for (let index = 0; index <= amountOfRandomElements; index++) {
-    const randomElement = getRandomElement(list);
-    if (!result.includes(randomElement)) {
-      result.push(randomElement);
-    }
-  }
-  return result;
-};
-
-const avatarsListNumbers = [
-  '01',
-  '02',
-  '03',
-  '04',
-  '05',
-  '06',
-  '07',
-  '08',
-  '09',
-  '10',
-];
-
-// Берем рандомный аватар и удаляем из списка чтобы не повторялся
-const getRandomAvatar = () => {
-  const randomAvatar =
-    avatarsListNumbers[getRandomNumber(0, avatarsListNumbers.length - 1)];
-  avatarsListNumbers.splice(avatarsListNumbers.indexOf(randomAvatar), 1);
-  return randomAvatar;
-};
-
-const types = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
-const checkTimes = ['12:00', '13:00', '14:00'];
-const featuresList = [
+const TYPES= ['palace', 'flat', 'house', 'bungalow', 'hotel'];
+const CHECK_TIMES = ['12:00', '13:00', '14:00'];
+const FEATURES_LIST = [
   'wifi',
   'dishwasher',
   'parking',
@@ -50,7 +8,7 @@ const featuresList = [
   'elevator',
   'conditioner',
 ];
-const titles = [
+const TITLES = [
   'Отличная в старом городе',
   'Молодежный прямо в центре',
   'с видом на залив',
@@ -62,8 +20,7 @@ const titles = [
   'с персональным бассейном',
   'со всеми удобствами',
 ];
-
-const descriptions = [
+const DESCRIPTIONS = [
   'Со всеми удобствами',
   'В стиле арт-деко',
   'Современная планировка',
@@ -75,36 +32,67 @@ const descriptions = [
   'Можно с животными',
   'Свежий ремонт',
 ];
-
-const photosList = [
+const PHOTO_LIST = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
+const PRICE_MIN = 1000;
+const PRICE_MAX = 10000;
+const ROOM_MIN = 1;
+const ROOM_MAX = 6;
+const GUESTS_MIN = 1;
+const GUESTS_MAX = 10;
+
+const getRandomNumber = (min = 0, max = 0) =>
+  Math.floor(min + Math.random() * (max - min));
+const getRandomCoordinates = (min = 0, max = 0, floats = 1) =>
+  (min + Math.random() * (max - min)).toFixed(floats);
+
+// Берем рандомный элемент из списка
+const getRandomElement = (list) => list[getRandomNumber(0, list.length - 1)];
+const getRandomAvatarNumber = (number) => {
+  if (number < 10) {
+    return `0${number}`;
+  }
+  return `${number}`;
+};
+
+// Берем рандомный элемент из списка который не повторяется
+const getRandomElements = (list) => {
+  const result = new Set();
+  const amountOfRandomElements = getRandomNumber(1, list.length - 1);
+  for( let index = 0; index < amountOfRandomElements; index++){
+    const randomItem = getRandomElement(list);
+    result.add(randomItem);
+  }
+  return Array.from(result);
+};
 
 // Создаем объект
-const createRentElement = () => {
-  const randomLatCoordinates = getRandomCoordinates(35.65, 35.7, 5);
-  const randomLngCoordinates = getRandomCoordinates(139.7, 139.8, 5);
-  const randomAvatarElement = `img/avatars/user${getRandomAvatar()}.png`;
-  const randomTitleElement = getRandomElement(titles);
-  const randomPrice = getRandomNumber(1000, 10000);
-  const randomTypeElement = getRandomElement(types);
-  const randomRoomsNumber = getRandomNumber(1, 6);
-  const randomGuestsNumber = getRandomNumber(1, 10);
-  const randomCheckinNumber = getRandomElement(checkTimes);
-  const randomCheckoutNumber = getRandomElement(checkTimes);
-  const randomFeaturesList = getRandomElements(featuresList);
-  const randomDescriptionElement = getRandomElement(descriptions);
-  const randomPhotosElements = getRandomElements(photosList);
-
+const createRentElement = (index) => {
+  const randomAvatarElement = `img/avatars/user${getRandomAvatarNumber(index)}.png`;
+  const randomTitleElement = getRandomElement(TITLES);
+  const randomPrice = getRandomNumber(PRICE_MIN, PRICE_MAX);
+  const randomTypeElement = getRandomElement(TYPES);
+  const randomRoomsNumber = getRandomNumber(ROOM_MIN, ROOM_MAX);
+  const randomGuestsNumber = getRandomNumber(GUESTS_MIN, GUESTS_MAX);
+  const randomCheckinNumber = getRandomElement(CHECK_TIMES);
+  const randomCheckoutNumber = getRandomElement(CHECK_TIMES);
+  const randomFeaturesList = getRandomElements(FEATURES_LIST);
+  const randomDescriptionElement = getRandomElement(DESCRIPTIONS);
+  const randomPhotosElements = getRandomElements(PHOTO_LIST);
+  const location = {
+    lat: getRandomCoordinates(35.65, 35.7, 5),
+    lng: getRandomCoordinates(139.7, 139.8, 5),
+  };
   return {
     author: {
       avatar: randomAvatarElement,
     },
     offer: {
       title: randomTitleElement,
-      address: `${randomLatCoordinates}, ${randomLngCoordinates}`,
+      address: `${location.lat}, ${location.lng}`,
       price: randomPrice,
       type: randomTypeElement,
       rooms: randomRoomsNumber,
@@ -115,15 +103,12 @@ const createRentElement = () => {
       description: randomDescriptionElement,
       photos: randomPhotosElements,
     },
-    location: {
-      lat: randomLatCoordinates,
-      lng: randomLngCoordinates,
-    },
+    location,
   };
 };
 
 const rentList = [];
 
-for (let index = 0; index < 10; index++) {
-  rentList.push(createRentElement());
+for (let index = 1; index < 11; index++) {
+  rentList.push(createRentElement(index));
 }
