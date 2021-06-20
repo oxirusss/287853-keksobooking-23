@@ -19,7 +19,3 @@ const getRandomElements = (list) => {
 };
 
 export {getRandomNumber, getRandomAvatarNumber, getRandomElement, getRandomElements, getRandomCoordinates};
-<<<<<<< HEAD
-
-=======
->>>>>>> 698975e91aed6906850fcdd2d8575cc5a592c8f2
