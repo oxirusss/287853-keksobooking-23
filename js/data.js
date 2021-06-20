@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import {getRandomNumber, getRandomAvatarNumber, getRandomElement, getRandomElements, getRandomCoordinates} from './utils';
+=======
+import {getRandomNumber, getRandomAvatarNumber, getRandomElement, getRandomElements, getRandomCoordinates} from './utils.js';
+>>>>>>> 698975e91aed6906850fcdd2d8575cc5a592c8f2
 
 const TYPES = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
 const CHECK_TIMES = ['12:00', '13:00', '14:00'];
@@ -80,4 +84,7 @@ for (let index = 0; index < 10; index++) {
 }
 
 export {rentList};
+<<<<<<< HEAD
 
+=======
+>>>>>>> 698975e91aed6906850fcdd2d8575cc5a592c8f2
