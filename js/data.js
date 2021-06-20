@@ -1,4 +1,4 @@
-import {getRandomNumber, getRandomAvatarNumber, getRandomElement, getRandomElements, getRandomCoordinates} from './utils';
+import {getRandomNumber, getRandomAvatarNumber, getRandomElement, getRandomElements, getRandomCoordinates} from './utils.js';
 
 const TYPES = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
 const CHECK_TIMES = ['12:00', '13:00', '14:00'];
