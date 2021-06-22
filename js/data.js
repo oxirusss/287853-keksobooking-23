@@ -73,10 +73,15 @@ const createRentElement = (index) => {
   };
 };
 
-const rentList = [];
+const generateRentList = () => {
+  const rentList = [];
 
-for (let index = 0; index < 10; index++) {
-  rentList.push(createRentElement(index + 1));
-}
+  for (let index = 0; index < 10; index++) {
+    rentList.push(createRentElement(index + 1));
+  }
 
-export {rentList};
+  return rentList;
+};
+
+export {generateRentList};
+

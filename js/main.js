@@ -1,8 +1,5 @@
-import {rentList} from './data.js';
+import {generateRentList} from './data.js';
 
-// Заглушка для линтера
-function testFunc() {
-  window.console.log(rentList);
-}
+const data = generateRentList();
+data.length;
 
-testFunc();
