@@ -83,5 +83,7 @@ const generateRentList = () => {
   return rentList;
 };
 
+
+
 export {generateRentList};
 
