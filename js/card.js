@@ -3,7 +3,6 @@ const newCardTemplate = cardTemplate.querySelector('.popup');
 const canvasMap = document.querySelector('#map-canvas');
 const housingType = {'palace': 'Дворец', 'flat': 'Квартира', 'bungalow': 'Бунгало', 'house': 'Дом', 'hotel': 'Отель'};
 
-
 const createCard = (data) => {
   const card = newCardTemplate.cloneNode(true);
 
@@ -57,4 +56,3 @@ const renderCard = (card) => {
 };
 
 export {renderCard};
-
