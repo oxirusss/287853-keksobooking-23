@@ -53,7 +53,7 @@ const createCard = (data) => {
     const houseType = card.querySelector('.popup__type');
     houseType.textContent = HousingType[data.offer.type];
   }
-  //Rooms check
+  //Rooms and Guests check
   if (data.offer.rooms && data.offer.guests) {
     const capacity = card.querySelector('.popup__text--capacity');
     capacity.textContent = `${data.offer.rooms} комнаты для ${data.offer.guests} гостей`;
