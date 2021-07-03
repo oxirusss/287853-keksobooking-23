@@ -51,25 +51,29 @@ const createCard = (data) => {
   //Type check
   if (data.offer.type) {
     const houseType = card.querySelector('.popup__type');
-    houseType.textContent = HousingType[data.offer.type];
+    houseType.textContent = HousingType[data.offer.type.toUpperCase()];
   }
   //Rooms and Guests check
   if (data.offer.rooms && data.offer.guests) {
     const capacity = card.querySelector('.popup__text--capacity');
     capacity.textContent = `${data.offer.rooms} комнаты для ${data.offer.guests} гостей`;
-  }
-  if (data.offer.rooms) {
+  } else if (data.offer.rooms && !data.offer.guests) {
     const capacityRooms = card.querySelector('.popup__text--capacity');
     capacityRooms.textContent = `${data.offer.rooms} комнат`;
-  }
-  if (data.offer.guests) {
+  } else if (!data.offer.rooms && data.offer.guests) {
     const capacityGuests = card.querySelector('.popup__text--capacity');
-    capacityGuests.textContent = `${data.offer.rooms} гостей`;
+    capacityGuests.textContent = `${data.offer.guests} гостей`;
   }
   //Time check
   if (data.offer.checkin && data.offer.checkout) {
     const time = card.querySelector('.popup__text--time');
     time.textContent = `Заезд после ${data.offer.checkin}, выезд до ${data.offer.checkout}`;
+  } else if (data.offer.checkin && !data.offer.checkout) {
+    const time = card.querySelector('.popup__text--time');
+    time.textContent = `Заезд после ${data.offer.checkin}`;
+  } else if (!data.offer.checkin && data.offer.checkout) {
+    const time = card.querySelector('.popup__text--time');
+    time.textContent = `Выезд до ${data.offer.checkout}`;
   }
   // Features check
   if (data.offer.features.length > 0) {
