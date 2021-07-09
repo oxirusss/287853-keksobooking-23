@@ -1,10 +1,10 @@
 import {generateRentList} from './data.js';
 import {renderCard} from './card.js';
-import {formAdState} from '../form';
+import {initFormStartState} from '../form';
 
 const data = generateRentList();
 renderCard(data[1]);
 data.length;
 
-const form = formAdState();
+const form = initFormStartState();
 form.length;
