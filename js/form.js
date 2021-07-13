@@ -1,7 +1,9 @@
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
 const MAX_PRICE_LENGTH = 1000000;
-const MIN_PRICES = {
+const MAX_ROOMS = 100;
+const ZERO_VALUE = 0;
+const typeToMinPrice = {
   bungalow: 0,
   flat: 1000,
   hotel: 3000,
@@ -25,41 +27,48 @@ const initFormStartState = () => {
 };
 
 //Title validity check
-adFormTitleInput.addEventListener('input', () => {
-  const titleLength = adFormTitleInput.value.length;
+const onFormTitleInput = (evt) => {
+  const titleElement = evt.currentTarget;
+  const titleLength = evt.currentTarget.value.length;
   if (titleLength < MIN_TITLE_LENGTH) {
-    adFormTitleInput.setCustomValidity(`Осталось ввести ${MIN_TITLE_LENGTH - titleLength} симв.`);
+    titleElement.setCustomValidity(`Осталось ввести ${MIN_TITLE_LENGTH - titleLength} симв.`);
   } else if (titleLength > MAX_TITLE_LENGTH) {
-    adFormTitleInput.setCustomValidity(`Удалите лишние ${titleLength - MAX_TITLE_LENGTH} симв.`);
+    titleElement.setCustomValidity(`Удалите лишние ${titleLength - MAX_TITLE_LENGTH} симв.`);
   } else {
-    adFormTitleInput.setCustomValidity('');
+    titleElement.setCustomValidity('');
   }
   adFormTitleInput.reportValidity();
-});
+};
 
 //Price validity check
-adFormPriceInput.addEventListener('input', () => {
-  const priceValue = adFormPriceInput.value;
-  if (MIN_PRICES[formTypeValue] >= priceValue) {
-    adFormPriceInput.setCustomValidity('Значение меньше минимального');
+const onFormPriceInput = (evt) => {
+  const priceElement = evt.currentTarget;
+  const priceValue = evt.currentTarget.value;
+  if (typeToMinPrice[formTypeValue] >= priceValue) {
+    priceElement.setCustomValidity('Значение меньше минимального');
   } else if (priceValue > MAX_PRICE_LENGTH) {
-    adFormPriceInput.setCustomValidity('Значение больше максимального');
+    priceElement.setCustomValidity('Значение больше максимального');
   } else {
-    adFormPriceInput.setCustomValidity('');
+    priceElement.setCustomValidity('');
   }
-  adFormPriceInput.reportValidity();
-});
+  adFormPriceInput.reportValidity(); //Можно ли это место тоже заменить на priceElement?
+};
 
 //Rooms and Capacity validity check
-adFormRoomsInput.addEventListener('change', () => {
-  if (+adFormRoomsInput.value === 100 && +adFormCapacityInput !== 0) {
-    adFormRoomsInput.setCustomValidity('Не соответствует условиям размещения');
-  } else if (+adFormRoomsInput.value <= +adFormCapacityInput) {
-    adFormRoomsInput.setCustomValidity('Не соответствует условиям размещения');
+const onFormRoomsInput = (evt) => {
+  const roomsElement = evt.currentTarget;
+  const roomsValue = evt.currentTarget.value;
+  if (+roomsValue === MAX_ROOMS && +adFormCapacityInput !== ZERO_VALUE) {
+    roomsElement.setCustomValidity('Не соответствует условиям размещения');
+  } else if (+roomsValue <= +adFormCapacityInput) { //А как убрать в константу input capacity? Ведь так получается мы опять объявляем его выше, а используем только тут
+    roomsElement.setCustomValidity('Не соответствует условиям размещения');
   } else {
-    adFormRoomsInput.setCustomValidity('');
+    roomsElement.setCustomValidity('');
   }
   adFormRoomsInput.reportValidity();
-});
+};
 
+adFormTitleInput.addEventListener('input', onFormTitleInput);
+adFormPriceInput.addEventListener('input', onFormPriceInput);
+adFormRoomsInput.addEventListener('input', onFormRoomsInput);
 export {initFormStartState};
