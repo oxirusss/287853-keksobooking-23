@@ -16,6 +16,8 @@ const adFormTitleInput = document.getElementById('title');
 const adFormPriceInput = document.getElementById('price');
 const adFormRoomsInput = document.getElementById('room_number');
 const adFormCapacityInput = document.getElementById('capacity').value;
+const formTimeInElement = document.getElementById('timein');
+const formTimeOutElement = document.getElementById('timeout');
 
 const initFormStartState = () => {
   const formAd = document.querySelector('.ad-form');
@@ -37,7 +39,7 @@ const onFormTitleInput = (evt) => {
   } else {
     titleElement.setCustomValidity('');
   }
-  adFormTitleInput.reportValidity();
+  titleElement.reportValidity();
 };
 
 //Price validity check
@@ -51,7 +53,7 @@ const onFormPriceInput = (evt) => {
   } else {
     priceElement.setCustomValidity('');
   }
-  adFormPriceInput.reportValidity(); //Можно ли это место тоже заменить на priceElement?
+  priceElement.reportValidity();
 };
 
 //Rooms and Capacity validity check
@@ -60,15 +62,38 @@ const onFormRoomsInput = (evt) => {
   const roomsValue = evt.currentTarget.value;
   if (+roomsValue === MAX_ROOMS && +adFormCapacityInput !== ZERO_VALUE) {
     roomsElement.setCustomValidity('Не соответствует условиям размещения');
-  } else if (+roomsValue <= +adFormCapacityInput) { //А как убрать в константу input capacity? Ведь так получается мы опять объявляем его выше, а используем только тут
+  } else if (+roomsValue <= +adFormCapacityInput) {
     roomsElement.setCustomValidity('Не соответствует условиям размещения');
   } else {
     roomsElement.setCustomValidity('');
   }
-  adFormRoomsInput.reportValidity();
+  roomsElement.reportValidity();
 };
+
+//Housing Change
+const onFormHouseTypeChange = (evt) => {
+  const houseType = evt.currentTarget.value;
+  adFormPriceInput.setAttribute('min', typeToMinPrice[houseType]);
+  adFormPriceInput.placeholder = typeToMinPrice[houseType];
+};
+
+//Time Change
+const onTimeChange = (evt) => {
+  const timeElement = evt.currentTarget;
+  const timeElementName = timeElement.name;
+  if(timeElementName === 'timein') {
+    formTimeOutElement.selectedIndex = timeElement.selectedIndex;
+  } else {
+    formTimeInElement.selectedIndex = timeElement.selectedIndex;
+  }
+};
+
 
 adFormTitleInput.addEventListener('input', onFormTitleInput);
 adFormPriceInput.addEventListener('input', onFormPriceInput);
 adFormRoomsInput.addEventListener('input', onFormRoomsInput);
+formTypeValue.addEventListener('change', onFormHouseTypeChange);
+formTimeOutElement.addEventListener('change', onTimeChange);
+formTimeInElement.addEventListener('change', onTimeChange);
+
 export {initFormStartState};
