@@ -37,7 +37,7 @@ const onFormTitleInput = (evt) => {
   } else {
     titleElement.setCustomValidity('');
   }
-  adFormTitleInput.reportValidity();
+  titleElement.reportValidity();
 };
 
 //Price validity check
@@ -51,7 +51,7 @@ const onFormPriceInput = (evt) => {
   } else {
     priceElement.setCustomValidity('');
   }
-  adFormPriceInput.reportValidity(); //Можно ли это место тоже заменить на priceElement?
+  priceElement.reportValidity(); //Можно ли это место тоже заменить на priceElement?
 };
 
 //Rooms and Capacity validity check
@@ -65,7 +65,7 @@ const onFormRoomsInput = (evt) => {
   } else {
     roomsElement.setCustomValidity('');
   }
-  adFormRoomsInput.reportValidity();
+  roomsElement.reportValidity();
 };
 
 adFormTitleInput.addEventListener('input', onFormTitleInput);
