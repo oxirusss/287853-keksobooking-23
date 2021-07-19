@@ -88,7 +88,6 @@ const onTimeChange = (evt) => {
   }
 };
 
-
 adFormTitleInput.addEventListener('input', onFormTitleInput);
 adFormPriceInput.addEventListener('input', onFormPriceInput);
 adFormRoomsInput.addEventListener('input', onFormRoomsInput);
