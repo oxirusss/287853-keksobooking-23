@@ -28,44 +28,6 @@ const initFormStartState = () => {
   mapFilters.setAttribute('disabled', true);
 };
 
-//Map rendering
-//Global L:readonly
-const mapRendering = L.map('map-canvas')
-  .on('load', () => {
-    initFormStartState();
-  })
-  .setView({
-    lat: 35.652832,
-    lng: 139.839478,
-  }, 10);
-
-L.tileLayer(
-  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  },
-).addTo(mapRendering);
-
-const createMapMarker = (point) => {
-  const {lat, lng} = point;
-  const mainMapIcon = L.icon({
-    iconUrl:'./img/main-pin.svg',
-    iconSize: [52, 52],
-    iconAnchor: [26, 52],
-  });
-
-  const mapMarker = L.marker (
-    {
-      lat,
-      lng,
-    },
-    {
-      mainMapIcon,
-    },
-  );
-  mapMarker.addTo(mapRendering);
-};
-createMapMarker();
-
 //Title validity check
 const onFormTitleInput = (evt) => {
   const titleElement = evt.currentTarget;
@@ -125,7 +87,6 @@ const onTimeChange = (evt) => {
     formTimeInElement.selectedIndex = timeElement.selectedIndex;
   }
 };
-
 
 adFormTitleInput.addEventListener('input', onFormTitleInput);
 adFormPriceInput.addEventListener('input', onFormPriceInput);

@@ -1,5 +1,4 @@
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
-const canvasMap = document.querySelector('#map-canvas');
 const HousingType = {
   PALACE: 'Дворец',
   FLAT: 'Квартира',

@@ -34,7 +34,6 @@ const renderingMap = () => {
 };
 
 // Creating main default marker
-
 const createMainDefaultMapMarker = () => {
   const defaultMapMarker = L.marker (
     {
@@ -44,22 +43,22 @@ const createMainDefaultMapMarker = () => {
       mainMapIcon,
     },
   );
-  defaultMapMarker.addTo(mapRendering);
+  defaultMapMarker.addTo(renderingMap);
 };
+createMainDefaultMapMarker(); //Временно чтоб не ругалась проверка
 
 //Creating simple map marker based on received data
-const createMapMarker = () => {
+const createMapMarker = (data) => {
   const mapMarker = L.marker (
     {
-      lat, // Тут я так понимаю нужно будет потом вытаскивать значения из офера, и уже согласно им будут выставляться метки, да?
-      lng,
+      lat: data.location.lat,
+      lng: data.location.lng,
     },
     {
       basicMapIcon,
     },
   );
-  mapMarker.addTo(mapRendering).bindPopup(createCard, {keepInView: true});
-  //Мне кажется или тут я намудрила с addTo, и тут нужна renderingMap
+  mapMarker.addTo(renderingMap).bindPopup(createCard, {keepInView: true});
   return mapMarker;
 };
 //
@@ -67,9 +66,10 @@ const markerGroup = L.layerGroup();
 
 const createMarkers= (elements) => {
   markerGroup.clearLayers();
-  elements.forEach((item) => markerGroup.addLayer(createMapMarker(item, markerGroup)));
-  markerGroup.addTo(mapRendering);
+  elements.forEach((item) => markerGroup.addLayer(createMapMarker(item))),
+  markerGroup.addTo(renderingMap);
   return markerGroup;
 };
+createMarkers(); //Временно чтоб не ругалась проверка
 
-export {renderingMap};
+export {renderingMap, createMainDefaultMapMarker, createMapMarker, createMarkers};
