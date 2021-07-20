@@ -98,6 +98,5 @@ const createCard = (data) => {
 //   const createdCard = createCard(card);
 //   canvasMap.appendChild(createdCard);
 // };
-createCard();
 
 export {createCard};
