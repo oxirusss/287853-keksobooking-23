@@ -94,9 +94,4 @@ const createCard = (data) => {
   avatar.src = data.author.avatar;
 };
 
-// const renderCard = (card) => {
-//   const createdCard = createCard(card);
-//   canvasMap.appendChild(createdCard);
-// };
-
 export {createCard};

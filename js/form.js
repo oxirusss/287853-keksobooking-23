@@ -1,3 +1,5 @@
+import {sendData} from './api.js';
+
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
 const MAX_PRICE_LENGTH = 1000000;
@@ -11,6 +13,7 @@ const typeToMinPrice = {
   palace: 10000,
 };
 
+const form = document.querySelector('.ad-form');
 const formTypeValue = document.getElementById('type').value;
 const adFormTitleInput = document.getElementById('title');
 const adFormPriceInput = document.getElementById('price');
@@ -27,6 +30,29 @@ const initFormStartState = () => {
   mapFilters.classList.toggle('map__filters--disabled');
   mapFilters.setAttribute('disabled', true);
 };
+
+const onFormSuccess = () => {
+  const formSuccessMessage = document.getElementById('#success').content.cloneNode(true);
+  document.body.appendChild(formSuccessMessage);
+  form.reset();
+};
+
+const showErrorMessage = () => {
+  const formErrorMessage =  document.getElementById('#error').content.cloneNode(true);
+  document.body.appendChild(formErrorMessage);
+};
+
+//Cancelling form default actions
+const onSubmitForm = (evt) => {
+  evt.preventDefault();
+  const formData = new FormData(evt.target);
+  sendData(formData, onFormSuccess, showErrorMessage);
+};
+
+const onFormReset = () => {
+  form.reset();
+};
+
 
 //Title validity check
 const onFormTitleInput = (evt) => {
@@ -94,5 +120,6 @@ adFormRoomsInput.addEventListener('input', onFormRoomsInput);
 formTypeValue.addEventListener('change', onFormHouseTypeChange);
 formTimeOutElement.addEventListener('change', onTimeChange);
 formTimeInElement.addEventListener('change', onTimeChange);
+form.addEventListener('submit', onSubmitForm);
 
 export {initFormStartState};
