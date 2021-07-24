@@ -1,17 +1,12 @@
-import {generateRentList} from './data.js';
-import {createCard} from './card.js';
-import {initFormStartState} from './form.js';
 import {renderingMap, createMainDefaultMapMarker, createMapMarker, createMarkers} from './map.js';
 import {getData} from './api.js';
+import {initFormStartState, onFormSuccess, showErrorMessage} from './form.js';
 
-const form = initFormStartState();
-form.length;
 
-getData(data => {
-  createMarkers(data);
-});
+getData(onFormSuccess, showErrorMessage);
 
 renderingMap();
 createMainDefaultMapMarker();
 createMapMarker();
 createMarkers();
+initFormStartState();

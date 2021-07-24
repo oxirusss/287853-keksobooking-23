@@ -1,4 +1,5 @@
 import {sendData} from './api.js';
+import {createMarkers, renderingMap} from './map.js';
 
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
@@ -31,15 +32,21 @@ const initFormStartState = () => {
   mapFilters.setAttribute('disabled', true);
 };
 
-const onFormSuccess = () => {
-  const formSuccessMessage = document.getElementById('#success').content.cloneNode(true);
-  document.body.appendChild(formSuccessMessage);
-  form.reset();
+const showErrorMessage = (text) => {
+  const formErrorMessage =  document.querySelector('#error').content.cloneNode(true);
+  document.body.appendChild(formErrorMessage);
 };
 
-const showErrorMessage = () => {
-  const formErrorMessage =  document.getElementById('#error').content.cloneNode(true);
-  document.body.appendChild(formErrorMessage);
+const showSuccessMessage = () => {
+  const formSuccessMessage = document.querySelector('#success').content.cloneNode(true);
+  document.body.appendChild(formSuccessMessage);
+};
+
+const onFormSuccess = () => {
+  form.classList.toggle('ad-form--enable');
+  form.setAttribute('enable', true);
+  createMarkers();
+  showSuccessMessage();
 };
 
 //Cancelling form default actions
@@ -51,6 +58,8 @@ const onSubmitForm = (evt) => {
 
 const onFormReset = () => {
   form.reset();
+  mapRendering.setView(tokyoCityCenter, 10); //Что то мне подсказывает что это тогда надо выносить в отбельную константу, да?)
+  forFilters.reset();
 };
 
 
@@ -121,5 +130,6 @@ formTypeValue.addEventListener('change', onFormHouseTypeChange);
 formTimeOutElement.addEventListener('change', onTimeChange);
 formTimeInElement.addEventListener('change', onTimeChange);
 form.addEventListener('submit', onSubmitForm);
+form.addEventListener('reset', onFormReset);
 
-export {initFormStartState};
+export {initFormStartState, onFormSuccess, onSubmitForm, showErrorMessage};
